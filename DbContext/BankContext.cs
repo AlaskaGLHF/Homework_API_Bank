@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Bank.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebApplication2.Models;
+namespace Bank.API.DataContext;
 
 public partial class BankContext : DbContext
 {

@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Bank.API.Interfaces;
-using Bank.API.Data;
 using Bank.API.Models;
+using Bank.API.DataContext;
 
 namespace Bank.API.Repositories
 {
     public class TransactionRepository : ITransactionRepository
     {
-        private readonly BankDbContext _context;
+        private readonly BankContext _context;
 
-        public TransactionRepository(BankDbContext context)
+        public TransactionRepository(BankContext context)
         {
             _context = context;
         }

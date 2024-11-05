@@ -1,22 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Bank.API.Interfaces;
-using Bank.API.Data;
 using Bank.API.Models;
+using Bank.API.DataContext;
 
 namespace Bank.API.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly BankDbContext _context;
+        private readonly BankContext _context;
 
-        public UserRepository(BankDbContext context)
+        public UserRepository(BankContext context)
         {
             _context = context;
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
         {
-            return await _context.Users.Where(u => !u.IsDeleted).ToListAsync();
+            return await _context.Users.Where(u => (bool)!u.IsDeleted).ToListAsync();
         }
 
         public async Task<User?> GetByIdAsync(int id)

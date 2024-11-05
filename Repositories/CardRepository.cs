@@ -1,27 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Bank.API.Data;
 using Bank.API.Interfaces;
 using Bank.API.Models;
+using Bank.API.DataContext;
 
 namespace Bank.API.Repositories
 {
     public class CardRepository : ICardRepository
     {
-        private readonly BankDbContext _context;
+        private readonly BankContext _context;
 
-        public CardRepository(BankDbContext context)
+        public CardRepository(BankContext context)
         {
             _context = context;
         }
 
         public async Task<IEnumerable<Card>> GetAllAsync()
         {
-            return await _context.Cards.Where(c => !c.IsDeleted).ToListAsync();
+            return await _context.Cards.Where(c => !c.IsDeleted.GetValueOrDefault()).ToListAsync();
         }
 
         public async Task<Card?> GetByIdAsync(int id)
         {
-            return await _context.Cards.FirstOrDefaultAsync(c => c.CardId == id && !c.IsDeleted);
+            return await _context.Cards.FirstOrDefaultAsync(c => c.CardId == id && !c.IsDeleted.GetValueOrDefault());
         }
 
         public async Task AddAsync(Card card)
@@ -48,5 +48,3 @@ namespace Bank.API.Repositories
         }
     }
 }
-
-

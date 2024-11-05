@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Bank.API.Models;
 using Bank.API.Interfaces;
-using Bank.API.Data;
+using Bank.API.DataContext;
 
 namespace Bank.API.Repositories
 {
     public class BalanceHistoryRepository : IBalanceHistoryRepository
     {
-        private readonly BankDbContext _context;
+        private readonly BankContext _context;
 
-        public BalanceHistoryRepository(BankDbContext context)
+        public BalanceHistoryRepository(BankContext context)
         {
             _context = context;
         }

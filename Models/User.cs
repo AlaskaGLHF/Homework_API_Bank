@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bank.API.Models
+namespace Bank.API.Models { 
 
 public partial class User
 {
@@ -40,4 +40,6 @@ public partial class User
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
     public virtual ICollection<Setting> Settings { get; set; } = new List<Setting>();
+}
+
 }

@@ -3,10 +3,21 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Bank.API.Services;
 using Bank.API.Repositories;
 using Bank.API.Interfaces;
-using Bank.API.Data;
+using Bank.API.Models;
+using Bank.API.DataContext;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddControllers();
+builder.Services.AddDbContext<BankContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<UserService>();
+
+builder.Configuration.AddUserSecrets<Program>();
 
 // Add services to the container.
 
@@ -30,16 +41,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
-
 app.UseRouting();
 
+app.Run();
 
-builder.Services.AddControllers();
-builder.Services.AddDbContext<BankDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<UserService>();
-
-builder.Configuration.AddUserSecrets<Program>();
