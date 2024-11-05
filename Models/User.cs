@@ -1,36 +1,43 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Bank.API.Models
+
+public partial class User
 {
-    public class User
-    {
-        public int UserId { get; set; }
+    public int UserId { get; set; }
 
-        [Required, MaxLength(50)]
-        public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
-        [Required, MaxLength(50)]
-        public string Surname { get; set; }
+    public string Surname { get; set; } = null!;
 
-        [MaxLength(50)]
-        public string? Patronymic { get; set; }
+    public string Patronymic { get; set; } = null!;
 
-        [Required, MaxLength(100)]
-        public string Email { get; set; }
+    public string Email { get; set; } = null!;
 
-        [MaxLength(15)]
-        public string? PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
 
-        [Required]
-        public string HashPassword { get; set; }
+    public string HashPassword { get; set; } = null!;
 
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+    public DateTime? CreatedDate { get; set; }
 
-        public string Status { get; set; } = "active";
+    public int? CountryId { get; set; }
 
-        public bool IsDeleted { get; set; } = false;
+    public string? Status { get; set; }
 
-        public DateTime? DeletedAt { get; set; } = null; 
-    }
+    public bool? IsDeleted { get; set; }
+
+    public DateTime? DeletedAt { get; set; }
+
+    public string? ImagePath { get; set; }
+
+    public virtual ICollection<CardRequest> CardRequests { get; set; } = new List<CardRequest>();
+
+    public virtual ICollection<Card> Cards { get; set; } = new List<Card>();
+
+    public virtual Country? Country { get; set; }
+
+    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+
+    public virtual ICollection<Setting> Settings { get; set; } = new List<Setting>();
 }

@@ -1,18 +1,19 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
-namespace Bank.API.Models
+namespace WebApplication2.Models;
+
+public partial class BalanceHistory
 {
-    public class BalanceHistory
-    {
-        public int BalanceHistoryId { get; set; }
+    public int BalanceHistoryId { get; set; }
 
-        public int CardId { get; set; }
-        public Card Card { get; set; }
+    public int CardId { get; set; }
 
-        [Required]
-        public decimal Balance { get; set; }
+    public decimal Newbalance { get; set; }
 
-        public DateTime RecordedAt { get; set; } = DateTime.UtcNow;
-    }
+    public decimal Oldbalance { get; set; }
+
+    public DateTime? Datetime { get; set; }
+
+    public virtual Card Card { get; set; } = null!;
 }

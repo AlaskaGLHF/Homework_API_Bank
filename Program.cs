@@ -32,6 +32,8 @@ app.MapControllers();
 
 app.Run();
 
+app.UseRouting();
+
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<BankDbContext>(options =>
@@ -40,4 +42,4 @@ builder.Services.AddDbContext<BankDbContext>(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UserService>();
 
-
+builder.Configuration.AddUserSecrets<Program>();

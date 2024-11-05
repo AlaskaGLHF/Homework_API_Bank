@@ -1,25 +1,33 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
-namespace Bank.API.Models
+namespace WebApplication2.Models;
+
+public partial class Transaction
 {
-    public class Transaction
-    {
-        public int TransactionId { get; set; }
+    public int TransactionId { get; set; }
 
-        public int? FromCardId { get; set; }
-        public Card? FromCard { get; set; }
+    public int? FromCardId { get; set; }
 
-        public int? ToCardId { get; set; }
-        public Card? ToCard { get; set; }
+    public int? ToCardId { get; set; }
 
-        [Required]
-        public decimal Amount { get; set; }
+    public decimal Amount { get; set; }
 
-        public DateTime TransactionDate { get; set; } = DateTime.UtcNow;
-        public int CurrencyId { get; set; }
+    public DateTime? TransactionDate { get; set; }
 
-        [Required, MaxLength(20)]
-        public string Status { get; set; } = "pending";
-    }
+    public int CurrencyId { get; set; }
+
+    public int? StatusId { get; set; }
+
+    public bool? IsDeleted { get; set; }
+
+    public DateTime? DeletedAt { get; set; }
+
+    public virtual Currency Currency { get; set; } = null!;
+
+    public virtual Card? FromCard { get; set; }
+
+    public virtual TransactionStatus? Status { get; set; }
+
+    public virtual Card? ToCard { get; set; }
 }
